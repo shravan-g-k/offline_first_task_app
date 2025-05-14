@@ -1,0 +1,13 @@
+{
+
+    "exec" : "ts-node",
+    "ext"  : "ts",
+    "args" : ["src/index.ts"],
+    "watch" : [
+        "src"
+    ],
+    "ignore" : [
+        "node_modules/**/*",
+        "dist/**/*"
+    ]
+}
