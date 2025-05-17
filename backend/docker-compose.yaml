@@ -4,10 +4,10 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8000:8000"
     environment:
       - PORT=8000     
-      - DATABASE_URL="postgres://postgres:postgres@db:5432/postgres"
+      - DATABASE_URL="postgresql://postgres:test123@localhost:5432/postgres"
     depends_on:
       - db
     volumes:
@@ -19,7 +19,8 @@ services:
     container_name: postgres_container 
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=test123
+      - POSTGRES_DB=mydb
     ports :
       - "5432:5432"
     

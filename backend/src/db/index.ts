@@ -1,8 +1,8 @@
-import { drizzle } from "drizzle-orm/singlestore/driver";
+import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
 const pool = new Pool({
-    connectionString : process.env.DATABASE_URL
+    connectionString: "postgres://postgresql:test123@localhost:5432/postgres"
 });
 
-export default drizzle(pool);
+export const db =  drizzle(pool);
