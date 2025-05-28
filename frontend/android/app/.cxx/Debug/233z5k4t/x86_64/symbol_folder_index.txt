@@ -1,0 +1,1 @@
+/home/shravan/coding/learn_projects/offline_first_task_app/frontend/build/app/intermediates/cxx/Debug/233z5k4t/obj/x86_64

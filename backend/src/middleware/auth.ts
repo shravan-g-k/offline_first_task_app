@@ -19,14 +19,14 @@ export const auth = async (
     const token = req.header("x-auth-token");
 
     if (!token) {
-      res.status(401).json({ msg: "No token, authorization denied" });
+      res.status(401).json({ error: "No token, authorization denied" });
       return;
     }
 
     const verified = jwt.verify(token, "passwordKey");
 
     if (!verified) {
-      res.status(401).json({ msg: "Token is not valid" });
+      res.status(401).json({ error: "Token is not valid" });
       return;
     }
 
@@ -38,7 +38,7 @@ export const auth = async (
       .where(eq(users.id, verifiedToken.id));
 
     if (!user) {
-      res.status(401).json({ msg: "User not found" });
+      res.status(401).json({ error: "User not found" });
       return;
     }
 
@@ -48,6 +48,6 @@ export const auth = async (
     next();
 
   } catch (error) {
-    res.status(500).json({ msg: "Server error" });
+    res.status(500).json({ error: "Server error" });
   }
 };

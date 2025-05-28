@@ -126,7 +126,7 @@ authRouter.get("/",auth, async (req : AuthRequest, res) => {
     try {
         
         if(!req.user){
-            res.status(401).json({msg : "Unauthorized"});
+            res.status(401).json({error : "Unauthorized"});
             return;
         }
         const [user] = await db
@@ -140,7 +140,7 @@ authRouter.get("/",auth, async (req : AuthRequest, res) => {
         });
     } catch (error) {
         
-        res.status(500).json({msg : error});
+        res.status(500).json({error : error});
     }
 });
 
