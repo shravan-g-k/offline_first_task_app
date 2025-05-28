@@ -1,0 +1,1 @@
+/home/shravan/coding/learn_projects/offline_first_task_app/frontend/build/app/intermediates/cxx/Debug/xk4z443r/obj/armeabi-v7a

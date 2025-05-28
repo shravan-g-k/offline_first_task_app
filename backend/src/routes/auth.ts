@@ -32,7 +32,7 @@ authRouter.post(
 
       if (existingUser.length) {
         res.status(400).json({
-          msg: "User already exists",
+          error: "User already exists",
         });
         return;
       }
@@ -46,12 +46,11 @@ authRouter.post(
       };
 
       const [user] = await db.insert(users).values(newUser).returning();
-
+      
       res.status(201).json(user);
     } catch (e) {
-      res.status(500).json({
-        error: e,
-      });
+      res.status(500).json({ error: e });
+
     }
   }
 );

@@ -1,0 +1,2 @@
+/home/shravan/coding/learn_projects/offline_first_task_app/frontend/android/app/.cxx/Debug/xk4z443r/x86_64/CMakeFiles/edit_cache.dir
+/home/shravan/coding/learn_projects/offline_first_task_app/frontend/android/app/.cxx/Debug/xk4z443r/x86_64/CMakeFiles/rebuild_cache.dir
