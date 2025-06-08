@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/features/auth/cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/pages/login_page.dart';
+import 'package:frontend/features/home/cubit/task_cubit.dart';
 import 'package:frontend/features/home/pages/home_page.dart';
 
 void main() {
   runApp(MultiBlocProvider(
     providers: [
-      BlocProvider(
-        create: (context) => AuthCubit(),
-      )
+      BlocProvider(create: (context) => AuthCubit()),
+      BlocProvider(create: (context) => TaskCubit()),
     ],
     child: const MyApp(),
   ));
@@ -23,12 +23,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     context.read<AuthCubit>().getUserData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
-          if(state is AuthUserLoggedIn){
+          if (state is AuthUserLoggedIn) {
             return const HomePage();
           }
           return const LoginPage();
