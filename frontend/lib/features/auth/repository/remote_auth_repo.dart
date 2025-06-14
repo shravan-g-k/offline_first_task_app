@@ -38,6 +38,7 @@ class RemoteAuthRepo {
       throw e.toString();
     }
   }
+
   Future<UserModel> login({
     required String email,
     required String password,
@@ -65,9 +66,8 @@ class RemoteAuthRepo {
       throw e.toString();
     }
   }
-  Future<UserModel?> getUserData(
 
-  ) async {
+  Future<UserModel?> getUserData() async {
     final token = await _spService.getToken();
     if (token == null || token.isEmpty) {
       return null;
@@ -81,8 +81,8 @@ class RemoteAuthRepo {
           'Content-Type': 'application/json',
           'x-auth-token': token,
         },
-        
       );
+
 
       if (res.statusCode != 200 || jsonDecode(res.body) == false) {
         return null;
@@ -98,15 +98,15 @@ class RemoteAuthRepo {
         },
       );
       if (res2.statusCode != 200) {
-        return jsonDecode( res2.body)["error"];
+        return jsonDecode(res2.body)["error"];
       }
+
 
       return UserModel.fromJson(res2.body);
     } catch (e) {
       final user = await _authLocalRepo.getUser();
 
-        return user;
-      
+      return user;
     }
   }
 }

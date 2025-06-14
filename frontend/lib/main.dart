@@ -79,6 +79,10 @@ class _MyAppState extends State<MyApp> {
         builder: (context, state) {
           if (state is AuthUserLoggedIn) {
             return const HomePage();
+          }else if(state is AuthLoading){
+            return const Center(child: CircularProgressIndicator(),);
+          }else if(state is AuthError){
+            return Center(child: Text(state.error),);
           }
           return const LoginPage();
         },

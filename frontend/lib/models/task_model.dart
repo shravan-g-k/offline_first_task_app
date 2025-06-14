@@ -12,7 +12,8 @@ class TaskModel {
   final DateTime dueAt;
   final DateTime createdAt;
   final DateTime updatedAt;
-  TaskModel({
+  final int isSynced;
+  TaskModel ({
     required this.id,
     required this.uid,
     required this.title,
@@ -21,6 +22,7 @@ class TaskModel {
     required this.dueAt,
     required this.createdAt,
     required this.updatedAt,
+    required this.isSynced
   });
   
 
@@ -33,6 +35,7 @@ class TaskModel {
     DateTime? dueAt,
     DateTime? createdAt,
     DateTime? updatedAt,
+    int? isSynced
   }) {
     return TaskModel(
       id: id ?? this.id,
@@ -43,6 +46,7 @@ class TaskModel {
       dueAt: dueAt ?? this.dueAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      isSynced: isSynced ?? this.isSynced
     );
   }
 
@@ -53,9 +57,10 @@ class TaskModel {
       'title': title,
       'description': description,
       'hexColor': rgbToHex(hexColor),
-      'dueAt': dueAt.millisecondsSinceEpoch,
-      'createdAt': createdAt.millisecondsSinceEpoch,
-      'updatedAt': updatedAt.millisecondsSinceEpoch,
+      'dueAt': dueAt.toIso8601String(),
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      'isSynced': isSynced
     };
   }
 
@@ -69,6 +74,7 @@ class TaskModel {
       dueAt: DateTime.parse(map['dueAt']),
       createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['updatedAt']),
+      isSynced: map['isSynced']??1,
     );
   }
 
@@ -78,7 +84,7 @@ class TaskModel {
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, uid: $uid, title: $title, description: $description, hexColor: $hexColor, dueAt: $dueAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'TaskModel(id: $id, uid: $uid, title: $title, description: $description, hexColor: $hexColor, dueAt: $dueAt, createdAt: $createdAt, updatedAt: $updatedAt, isSynced: $isSynced) ';
   }
 
   @override
@@ -93,7 +99,8 @@ class TaskModel {
       other.hexColor == hexColor &&
       other.dueAt == dueAt &&
       other.createdAt == createdAt &&
-      other.updatedAt == updatedAt;
+      other.updatedAt == updatedAt &&
+      other.isSynced == isSynced;
   }
 
   @override
@@ -105,6 +112,7 @@ class TaskModel {
       hexColor.hashCode ^
       dueAt.hashCode ^
       createdAt.hashCode ^
-      updatedAt.hashCode;
+      updatedAt.hashCode ^
+      isSynced.hashCode;
   }
 }

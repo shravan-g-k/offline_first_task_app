@@ -30,6 +30,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
       await context.read<TaskCubit>().createNewTask(
             title: titleController.text.trim(),
             description: descriptionController.text.trim(),
+            uid: user.user.id,
             hexColor: selectedColor,
             token: user.user.token,
             dueAt: selectedDate,

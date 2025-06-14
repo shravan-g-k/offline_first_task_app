@@ -38,6 +38,25 @@ taskRouter.delete("/", auth, async (req: AuthRequest, res: Response) => {
 
     res.json(true);
   } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
+taskRouter.post("/sync", auth, async (req: AuthRequest, res: Response) => {
+  try {
+    const taksList = req.body;
+
+    const filteredTasks :NewTask[] = [];
+
+    for (let task of taksList) {
+       task = {...task, dueAt : new Date(task.dueAt), createdAt : new Date(task.createdAt), updatedAt : new Date(task.updatedAt), uid: req.user};
+       filteredTasks.push(task);
+    }
+
+    const pushedTask = await db.insert(tasks).values(filteredTasks).returning();
+
+    res.status(201).json(pushedTask);
+  } catch (error) {
     console.log(error);
     res.status(500).json({ error: error });
   }

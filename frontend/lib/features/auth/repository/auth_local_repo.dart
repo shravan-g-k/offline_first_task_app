@@ -19,13 +19,13 @@ class AuthLocalRepo {
 
     return await openDatabase(path, version: 1, onCreate: (db, version) async {
       await db.execute('''
-        CREATE TABLE $tableName (q
+        CREATE TABLE $tableName (
           id TEXT PRIMARY KEY,
           name TEXT NOT NULL,
           email TEXT NOT NULL UNIQUE,
           token TEXT NOT NULL,
-          createdAt INT NOT NULL,
-          updatedAt INT NOT NULL
+          createdAt TEXT NOT NULL,
+          updatedAt TEXT NOT NULL
         )
       ''');
     });

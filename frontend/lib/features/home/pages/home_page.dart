@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,12 @@ class _HomePageState extends State<HomePage> {
     AuthUserLoggedIn user = context.read<AuthCubit>().state as AuthUserLoggedIn;
     String token = user.user.token;
     context.read<TaskCubit>().getTask(token: token);
+    Connectivity().onConnectivityChanged.listen((event) {
+      if (event.contains(ConnectivityResult.wifi)) {
+        // ignore: use_build_context_synchronously
+        context.read<TaskCubit>().getTask(token: token);
+      }
+    });
   }
 
   @override
@@ -60,7 +67,7 @@ class _HomePageState extends State<HomePage> {
           } else if (state is GetTasksSuccess) {
             tasks = state.tasks.where((task) {
               return DateFormat('d').format(task.dueAt) ==
-                  DateFormat('d').format(selectedDate) &&
+                      DateFormat('d').format(selectedDate) &&
                   selectedDate.month == task.dueAt.month &&
                   selectedDate.year == task.dueAt.year;
             }).toList();
